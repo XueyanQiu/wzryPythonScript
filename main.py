@@ -312,10 +312,25 @@ def rank_meeting_challenge_once():
     clickImage('continueButton')
 
 
+# 关闭开屏广告
+def close_start_game_ad():
+    for i in range(6):
+        clickImage('closeAd')
+
+
+# 点击开始游戏
+def click_start_game():
+    print('点击 开始游戏')
+    clickImage('startGame')
+    time.sleep(5)
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     imgDocumentPath = './img/'
     listenThreadRunning = False
+    click_start_game()
+    close_start_game_ad()
     get_emails()
     getDajiReward()
     start_expedition()
