@@ -1,22 +1,22 @@
 import threading
 import time
 
-import pyautogui
+from pyautogui import locateCenterOnScreen, locateOnScreen, click
 import pytesseract
 from PIL import ImageGrab, ImageEnhance, ImageOps
 
 
 # back to main page
 def back_to_main_page():
-    while pyautogui.locateCenterOnScreen(imgDocumentPath + 'mainPageToolBar.png', confidence=0.7) is None:
+    while locateCenterOnScreen(imgDocumentPath + 'mainPageToolBar.png', confidence=0.7) is None:
         clickImage('backButton')
 
 
 # click the image
 def clickImage(imageName):
-    location = pyautogui.locateCenterOnScreen(imgDocumentPath + imageName + '.png', confidence=0.7, grayscale=False)
+    location = locateCenterOnScreen(imgDocumentPath + imageName + '.png', confidence=0.7, grayscale=False)
     if location is not None:
-        pyautogui.click(location.x, location.y, button='left')
+        click(location.x, location.y, button='left')
         time.sleep(1)
 
 
@@ -35,11 +35,11 @@ def clickContinueButton():
     global listenThreadRunning
     while listenThreadRunning:
         time.sleep(1)
-        continueButtonLocation = pyautogui.locateCenterOnScreen(imgDocumentPath + 'continueButton.png', confidence=0.7)
+        continueButtonLocation = locateCenterOnScreen(imgDocumentPath + 'continueButton.png', confidence=0.7)
         if continueButtonLocation is not None:
             time.sleep(0.5)
             print('点击 继续')
-            pyautogui.click(continueButtonLocation.x, continueButtonLocation.y, button='left')
+            click(continueButtonLocation.x, continueButtonLocation.y, button='left')
     print('结束线程-点击“继续”')
 
 
@@ -48,18 +48,18 @@ def clickEnsureButton():
     global listenThreadRunning
     while listenThreadRunning:
         time.sleep(1)
-        ensureButtonLocation = pyautogui.locateCenterOnScreen(imgDocumentPath + 'ensureButton1.png', confidence=0.7,
+        ensureButtonLocation = locateCenterOnScreen(imgDocumentPath + 'ensureButton1.png', confidence=0.7,
                                                               grayscale=False)
         if ensureButtonLocation is None:
-            ensureButtonLocation = pyautogui.locateCenterOnScreen(imgDocumentPath + 'ensureButton2.png', confidence=0.7,
+            ensureButtonLocation = locateCenterOnScreen(imgDocumentPath + 'ensureButton2.png', confidence=0.7,
                                                                   grayscale=False)
         if ensureButtonLocation is None:
-            ensureButtonLocation = pyautogui.locateCenterOnScreen(imgDocumentPath + 'ensureButton3.png', confidence=0.7,
+            ensureButtonLocation = locateCenterOnScreen(imgDocumentPath + 'ensureButton3.png', confidence=0.7,
                                                                   grayscale=False)
         if ensureButtonLocation is not None:
             time.sleep(0.5)
             print('点击 确定')
-            pyautogui.click(ensureButtonLocation.x, ensureButtonLocation.y, button='left')
+            click(ensureButtonLocation.x, ensureButtonLocation.y, button='left')
     print('结束线程-点击“确定”')
 
 
@@ -68,11 +68,11 @@ def clickChallengeButton():
     global listenThreadRunning
     while listenThreadRunning:
         time.sleep(2)
-        challengeButtonLocation = pyautogui.locateCenterOnScreen(imgDocumentPath + 'challengeButton.png',
+        challengeButtonLocation = locateCenterOnScreen(imgDocumentPath + 'challengeButton.png',
                                                                  confidence=0.85, grayscale=False)
         if challengeButtonLocation is not None:
             print('点击 挑战')
-            pyautogui.click(challengeButtonLocation.x, challengeButtonLocation.y, button='left')
+            click(challengeButtonLocation.x, challengeButtonLocation.y, button='left')
             time.sleep(15)
     print('结束线程-点击“挑战”')
 
@@ -82,12 +82,12 @@ def clickScreenToContinue():
     global listenThreadRunning
     while listenThreadRunning:
         time.sleep(2)
-        clickScreenButtonLocation = pyautogui.locateCenterOnScreen(imgDocumentPath + 'clickScreenToContinue.png',
+        clickScreenButtonLocation = locateCenterOnScreen(imgDocumentPath + 'clickScreenToContinue.png',
                                                                    confidence=0.7)
         if clickScreenButtonLocation is not None:
             time.sleep(0.3)
             print('点击 点击屏幕继续')
-            pyautogui.click(clickScreenButtonLocation.x, clickScreenButtonLocation.y, button='left')
+            click(clickScreenButtonLocation.x, clickScreenButtonLocation.y, button='left')
             time.sleep(15)
     print('结束线程-点击“点击屏幕继续”')
 
@@ -97,12 +97,12 @@ def clickCurrentLevel():
     global listenThreadRunning
     while listenThreadRunning:
         time.sleep(2)
-        clickCurrentLevelLocation = pyautogui.locateCenterOnScreen(imgDocumentPath + 'currentLevel.png', confidence=0.6,
+        clickCurrentLevelLocation = locateCenterOnScreen(imgDocumentPath + 'currentLevel.png', confidence=0.6,
                                                                    grayscale=False)
         if clickCurrentLevelLocation is not None:
             time.sleep(0.3)
             print('点击 当前关卡')
-            pyautogui.click(clickCurrentLevelLocation.x, clickCurrentLevelLocation.y, button='left')
+            click(clickCurrentLevelLocation.x, clickCurrentLevelLocation.y, button='left')
             time.sleep(15)
     print('结束线程-点击“当前关卡”')
 
@@ -113,7 +113,7 @@ def oneTimeExploreFinishListener():
     global leftRefreshTime
     while listenThreadRunning:
         time.sleep(4)
-        endTargetLocation = pyautogui.locateCenterOnScreen(imgDocumentPath + 'oneTimeExpeditionEnd.png', confidence=0.6)
+        endTargetLocation = locateCenterOnScreen(imgDocumentPath + 'oneTimeExpeditionEnd.png', confidence=0.6)
         if endTargetLocation is not None:
             print('一次远征结束')
             listenThreadRunning = False
@@ -181,7 +181,7 @@ def getDajiReward():
 
 # 当前六国远征刷新次数位置进行截图，提高对比度，转换为灰度图，色彩反转后，保存。图案最终为白底黑字方便ocr识别
 def grab_expedition_rest_time():
-    refreshImgLocation = pyautogui.locateOnScreen(imgDocumentPath + 'todayLastExploreTimeText.png')
+    refreshImgLocation = locateOnScreen(imgDocumentPath + 'todayLastExploreTimeText.png')
     if refreshImgLocation is None:
         return False
     else:
@@ -212,14 +212,14 @@ def get_emails():
     clickImage('systemEmails')
     print('点击 立即领取')
     clickImage('getSystemEmailAttachments')
-    while pyautogui.locateCenterOnScreen(imgDocumentPath + 'ensureButton2.png', confidence=0.8) is not None:
+    while locateCenterOnScreen(imgDocumentPath + 'ensureButton2.png', confidence=0.8) is not None:
         clickImage('ensureButton2')
         time.sleep(0.5)
     print('点击 好友邮件')
     clickImage('friendEmails')
     print('点击 立即领取')
     clickImage('getSystemEmailAttachments')
-    while pyautogui.locateCenterOnScreen(imgDocumentPath + 'ensureButton2.png', confidence=0.8) is not None:
+    while locateCenterOnScreen(imgDocumentPath + 'ensureButton2.png', confidence=0.8) is not None:
         clickImage('ensureButton2')
         time.sleep(0.5)
     print('点击 返回')
@@ -259,7 +259,7 @@ def start_rank_meeting():
 
 # 当前武道大会刷新次数位置进行截图，提高对比度，转换为灰度图，色彩反转后，保存。图案最终为白底黑字方便ocr识别
 def grab_rank_meeting_rest_time():
-    refreshChallengerImgLocation = pyautogui.locateOnScreen(imgDocumentPath + 'refreshChallenger.png')
+    refreshChallengerImgLocation = locateOnScreen(imgDocumentPath + 'refreshChallenger.png')
     if refreshChallengerImgLocation is None:
         return False
     else:
@@ -283,6 +283,7 @@ def get_rest_rank_meeting_time():
             res = 10
         elif last_time[1] == '1':
             res = int(last_time[0])
+        print('last_time:' + last_time)
         print('剩余武道大会刷新次数： ' + str(res))
         return res
     else:
@@ -291,17 +292,19 @@ def get_rest_rank_meeting_time():
 
 # 开始一次武道大会挑战
 def rank_meeting_challenge_once():
-    refreshChallengerImgLocation = pyautogui.locateOnScreen(imgDocumentPath + 'refreshChallenger.png', confidence=0.7)
+    refreshChallengerImgLocation = locateOnScreen(imgDocumentPath + 'refreshChallenger.png', confidence=0.7)
     click_challenge_pos_x = refreshChallengerImgLocation[0] + refreshChallengerImgLocation[2] * 0.5
     click_challenge_pos_y = refreshChallengerImgLocation[1] - refreshChallengerImgLocation[3] * 2
     print('点击 挑战三名中的最后一个')
-    pyautogui.click(click_challenge_pos_x, click_challenge_pos_y, button='left')
+    click(click_challenge_pos_x, click_challenge_pos_y, button='left')
+    time.sleep(1)
     print('点击 挑战')
     clickImage('challengeButton')
     print('点击 确定')
     clickImage('ensureButton1')
-    while pyautogui.locateCenterOnScreen(imgDocumentPath + 'clickScreenToContinue.PNG', confidence=0.7) is None:
+    while locateCenterOnScreen(imgDocumentPath + 'clickScreenToContinue.PNG', confidence=0.7) is None:
         time.sleep(1)
+    time.sleep(2)
     print('点击 点击屏幕继续')
     clickImage('clickScreenToContinue')
     print('点击 继续')
