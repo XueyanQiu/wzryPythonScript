@@ -2,7 +2,6 @@ from pyautogui import locateCenterOnScreen, click
 import time
 from PIL import ImageGrab, ImageEnhance, ImageOps
 
-
 imgDocumentPath = './img/'
 
 
@@ -12,6 +11,13 @@ def clickImage(imageName):
     if location is not None:
         click(location.x, location.y, button='left')
         time.sleep(1)
+
+
+# wait until the image appear, then click the image
+def clickImageUntilItAppear(imageName):
+    while locateCenterOnScreen(imgDocumentPath + imageName + '.png', confidence=0.7, grayscale=False) is None:
+        time.sleep(1)
+    clickImage(imageName)
 
 
 # grab the image
@@ -26,5 +32,7 @@ def grab_image(x1: int, x2: int, y1: int, y2: int, name: str):
 
 
 def print_doc(content: str):
+    writestr = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '  ' + content + '\n'
+    print(writestr)
     with open('log.txt', 'a') as logfile:
-        logfile.write(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + '  ' + content + '\n')
+        logfile.write(writestr)

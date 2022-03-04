@@ -1,6 +1,6 @@
 import threading
 import time
-from commonUtils import clickImage, print_doc, grab_image, imgDocumentPath
+from commonUtils import clickImage, print_doc, grab_image, imgDocumentPath, clickImageUntilItAppear
 
 from pyautogui import locateCenterOnScreen, locateOnScreen, click
 import pytesseract
@@ -291,9 +291,7 @@ def rank_meeting_challenge_once():
     clickImage('challengeButton')
     print_doc('点击 确定')
     clickImage('ensureButton1')
-    while locateCenterOnScreen(imgDocumentPath + 'clickScreenToContinue.PNG', confidence=0.7) is None:
-        time.sleep(1)
-    time.sleep(2)
+    clickImageUntilItAppear('clickScreenToContinue')
     print_doc('点击 点击屏幕继续')
     clickImage('clickScreenToContinue')
     print_doc('点击 继续')
@@ -313,7 +311,7 @@ def close_start_game_ad():
 # 点击开始游戏
 def click_start_game():
     print_doc('点击 开始游戏')
-    clickImage('startGame')
+    clickImageUntilItAppear('startGame')
     time.sleep(5)
 
 
@@ -322,6 +320,7 @@ def logout():
     clickImage('settingButton')
     print_doc('点击 退出登录')
     clickImage('wzryInLogout')
+    clickImage('ensureButton1')
 
 
 # Press the green button in the gutter to run the script.

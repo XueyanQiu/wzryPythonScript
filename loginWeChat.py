@@ -30,6 +30,7 @@ def login_wechat_quit():
     read_info()
     print_doc('点击 微信')
     open_wechat()
+    clickImage('wechatEnsure')
     input_wechat_password()
     print_doc('点击 登录')
     clickImage('loginGreen')
