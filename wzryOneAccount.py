@@ -202,7 +202,8 @@ def get_emails():
     clickImage('friendEmails')
     print_doc('点击 立即领取')
     clickImage('getSystemEmailAttachments')
-    while locateCenterOnScreen(imgDocumentPath + 'ensureButton2.png', confidence=0.8) is not None:
+    while (locateCenterOnScreen(imgDocumentPath + 'ensureButton2.png', confidence=0.8) is not None) \
+            or (locateCenterOnScreen(imgDocumentPath + 'continueNextTime.png', confidence=0.8) is not None):
         clickImage('ensureButton2')
         time.sleep(0.5)
         clickImage('continueNextTime')
