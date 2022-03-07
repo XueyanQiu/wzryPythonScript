@@ -194,7 +194,7 @@ def get_emails():
     print_doc('点击 系统邮件')
     clickImage('systemEmails')
     print_doc('点击 立即领取')
-    clickImage('getSystemEmailAttachments')
+    clickImage('getSystemEmailAttachments', 0.85)
     while locateCenterOnScreen(imgDocumentPath + 'ensureButton2.png', confidence=0.8) is not None:
         clickImage('ensureButton2')
         time.sleep(0.5)

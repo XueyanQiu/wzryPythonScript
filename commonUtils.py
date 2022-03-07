@@ -6,8 +6,8 @@ imgDocumentPath = './img/'
 
 
 # click the image
-def clickImage(imageName):
-    location = locateCenterOnScreen(imgDocumentPath + imageName + '.png', confidence=0.7, grayscale=False)
+def clickImage(imageName, confidence=0.7):
+    location = locateCenterOnScreen(imgDocumentPath + imageName + '.png', confidence=confidence, grayscale=False)
     if location is not None:
         click(location.x, location.y, button='left')
         time.sleep(1)
