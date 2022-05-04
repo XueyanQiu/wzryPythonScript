@@ -1,0 +1,6 @@
+.idea
+*.iml
+out
+gen
+log.txt
+wechat.txt

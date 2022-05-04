@@ -324,9 +324,17 @@ def logout():
     clickImage('ensureButton1')
 
 
+def close_old_gamer_back_window():
+    time.sleep(5)
+    print('点击关闭回归玩家奖励')
+    clickImage('closeOldGamerBack')
+
+
 # Press the green button in the gutter to run the script.
-def one_account_action():
+def one_account_action(need_close_back: bool):
     click_start_game()
+    if need_close_back:
+        close_old_gamer_back_window()
     close_start_game_ad()
     get_emails()
     getDajiReward()
